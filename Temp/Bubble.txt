@@ -1,0 +1,53 @@
+    static void Main()
+    {
+        int[] array = { 34, 2, 23, 12, 45, 29, 5, 1 };
+
+        Console.WriteLine("Исходный массив:");
+        PrintArray(array);
+
+        BubbleSort(array);
+
+        Console.WriteLine("\nОтсортированный массив:");
+        PrintArray(array);
+    }
+
+    // Метод пузырьковой сортировки
+    static void BubbleSort(int[] array)
+    {
+        int n = array.Length; // Длина массива
+        bool swapped;
+
+        // Внешний цикл для каждого элемента массива
+        for (int i = 0; i < n - 1; i++)
+        {
+            swapped = false; // Флаг для отслеживания обменов элементов
+
+            // Внутренний цикл для сравнения соседних элементов
+            for (int j = 0; j < n - 1 - i; j++)
+            {
+                if (array[j] > array[j + 1]) // Если текущий элемент больше следующего
+                {
+                    Swap(array, j, j + 1); // Меняем их местами
+                    swapped = true; // Устанавливаем флаг в true, так как произошёл обмен
+                }
+            }
+
+            // Если не было обменов элементов, массив уже отсортирован
+            if (!swapped)
+                break;
+        }
+    }
+
+    // Метод обмена элементов массива
+    static void Swap(int[] array, int a, int b)
+    {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }
+
+    // Метод печати массива
+    static void PrintArray(int[] array)
+    {
+        Console.WriteLine(string.Join(", ", array));
+    }

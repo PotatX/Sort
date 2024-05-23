@@ -1,0 +1,73 @@
+ int[] array = { 38, 27, 43, 3, 9, 82, 10 };
+ Console.WriteLine("Original array:");
+ PrintArray(array);
+
+ MergeSortAlgorithm(array, 0, array.Length - 1);
+
+ Console.WriteLine("Sorted array:");
+ PrintArray(array);
+
+ static void MergeSortAlgorithm(int[] array, int left, int right)
+ {
+     if (left < right)
+     {
+         int middle = (left + right) / 2;
+
+         MergeSortAlgorithm(array, left, middle);
+         MergeSortAlgorithm(array, middle + 1, right);
+
+         Merge(array, left, middle, right);
+     }
+ }
+
+ static void Merge(int[] array, int left, int middle, int right)
+ {
+     int leftArrayLength = middle - left + 1;
+     int rightArrayLength = right - middle;
+
+     int[] leftArray = new int[leftArrayLength];
+     int[] rightArray = new int[rightArrayLength];
+
+     Array.Copy(array, left, leftArray, 0, leftArrayLength);
+     Array.Copy(array, middle + 1, rightArray, 0, rightArrayLength);
+
+     int i = 0, j = 0;
+     int k = left;
+     while (i < leftArrayLength && j < rightArrayLength)
+     {
+         if (leftArray[i] <= rightArray[j])
+         {
+             array[k] = leftArray[i];
+             i++;
+         }
+         else
+         {
+             array[k] = rightArray[j];
+             j++;
+         }
+         k++;
+     }
+
+     while (i < leftArrayLength)
+     {
+         array[k] = leftArray[i];
+         i++;
+         k++;
+     }
+
+     while (j < rightArrayLength)
+     {
+         array[k] = rightArray[j];
+         j++;
+         k++;
+     }
+ }
+
+ static void PrintArray(int[] array)
+ {
+     foreach (int item in array)
+     {
+         Console.Write(item + " ");
+     }
+     Console.WriteLine();
+ }

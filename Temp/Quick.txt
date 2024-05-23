@@ -1,0 +1,59 @@
+// Инициализируем массив для сортировки
+
+int[] array = [34, 7, 23, 32, 5, 62, 32, 10, 2];
+
+// Вызываем метод быстрой сортировки для всего массива
+QuickSort(array, 0, array.Length - 1);
+
+// Выводим отсортированный массив на консоль
+Console.WriteLine(string.Join(", ", array));
+
+// Метод быстрой сортировки
+static void QuickSort(int[] array, int low, int high)
+{
+    // Проверяем базовый случай рекурсии: если подмассив содержит больше одного элемента
+    if (low < high)
+    {
+        // Разделяем массив и получаем индекс опорного элемента
+        int pivotIndex = Partition(array, low, high);
+
+        // Рекурсивно сортируем элементы до и после опорного элемента
+        QuickSort(array, low, pivotIndex - 1);
+        QuickSort(array, pivotIndex + 1, high);
+    }
+}
+
+// Метод разделения массива
+static int Partition(int[] array, int low, int high)
+{
+    // Выбираем последний элемент подмассива как опорный
+    int pivot = array[high];
+    // Индекс меньшего элемента
+    int i = low - 1;
+
+    // Перебираем элементы массива
+    for (int j = low; j < high; j++)
+    {
+        // Если текущий элемент меньше опорного
+        if (array[j] < pivot)
+        {
+            // Увеличиваем индекс меньшего элемента
+            i++;
+            // Меняем местами элементы
+            Swap(array, i, j);
+        }
+    }
+
+    // Меняем местами опорный элемент и элемент, следующий за последним меньшим элементом
+    Swap(array, i + 1, high);
+    // Возвращаем индекс опорного элемента
+    return i + 1;
+}
+
+// Метод обмена элементов массива
+static void Swap(int[] array, int a, int b)
+{
+    int temp = array[a];
+    array[a] = array[b];
+    array[b] = temp;
+}

@@ -1,0 +1,62 @@
+int[] array = { 5, 3, 8, 4, 2, 7, 1, 10 };
+Console.WriteLine("Original array:");
+PrintArray(array);
+
+ShakerSortAlgorithm(array);
+
+Console.WriteLine("Sorted array:");
+PrintArray(array);
+
+static void ShakerSortAlgorithm(int[] array)
+{
+    bool swapped = true;
+    int start = 0;
+    int end = array.Length;
+
+    while (swapped)
+    {
+        swapped = false;
+
+        for (int i = start; i < end - 1; ++i)
+        {
+            if (array[i] > array[i + 1])
+            {
+                Swap(ref array[i], ref array[i + 1]);
+                swapped = true;
+            }
+        }
+
+        if (!swapped)
+            break;
+
+        swapped = false;
+        end--;
+
+        for (int i = end - 1; i >= start; --i)
+        {
+            if (array[i] > array[i + 1])
+            {
+                Swap(ref array[i], ref array[i + 1]);
+                swapped = true;
+            }
+        }
+
+        start++;
+    }
+}
+
+static void Swap(ref int a, ref int b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+static void PrintArray(int[] array)
+{
+    foreach (int item in array)
+    {
+        Console.Write(item + " ");
+    }
+    Console.WriteLine();
+}

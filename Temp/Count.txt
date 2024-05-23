@@ -1,0 +1,47 @@
+ int[] array = { 4, 2, 2, 8, 3, 3, 1, 7 };
+
+ Console.WriteLine("Исходный массив:");
+ PrintArray(array);
+
+ CountingSort(array);
+
+ Console.WriteLine("\nОтсортированный массив:");
+ PrintArray(array);
+
+ // Метод сортировки подсчётом
+ static void CountingSort(int[] array)
+ {
+     // Находим максимальный элемент в массиве для определения размера вспомогательного массива
+     int max = array[0];
+     for (int i = 1; i < array.Length; i++)
+     {
+         if (array[i] > max)
+             max = array[i];
+     }
+
+     // Создаём и инициализируем вспомогательный массив подсчётов
+     int[] count = new int[max + 1];
+
+     // Подсчитываем количество вхождений каждого элемента
+     for (int i = 0; i < array.Length; i++)
+     {
+         count[array[i]]++;
+     }
+
+     // Переписываем отсортированные элементы обратно в исходный массив
+     int index = 0;
+     for (int i = 0; i < count.Length; i++)
+     {
+         while (count[i] > 0)
+         {
+             array[index++] = i;
+             count[i]--;
+         }
+     }
+ }
+
+ // Метод печати массива
+ static void PrintArray(int[] array)
+ {
+     Console.WriteLine(string.Join(", ", array));
+ }

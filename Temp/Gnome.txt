@@ -1,0 +1,18 @@
+    int[] array = [34, 7, 23, 32, 5, 62, 32, 10, 2];
+    var index = 0;
+
+    while(index < array.Length)
+    {
+        if (index == 0 || array[index] >= array[index - 1])
+        {
+            index++;
+            continue;
+        }
+
+        var tmp = array[index];
+        array[index] = array[index - 1];
+        array[index - 1] = tmp;
+        index--;
+    }
+
+    Console.WriteLine(string.Join(" ", array));
